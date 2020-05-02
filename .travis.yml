@@ -4,14 +4,14 @@ services:
 
     # modifying to try to make client directory get picked up
 before_install:
-    - docker build -t sampetrie/react-test -f ./client/Dockerfile.dev ./client
+    - docker build -t sampetrie/react-test -f ./clients/Dockerfile.dev ./clients
 
 script:
     - docker run sampetrie/react-test npm test -- --coverage
 
 after_success:
     # build images for each part of the project
-    - docker build -t sampetrie/multi-client ./client
+    - docker build -t sampetrie/multi-client ./clients
     - docker build -t sampetrie/multi-nginx ./nginx
     - docker build -t sampetrie/multi-server ./server
     - docker build -t sampetrie/multi-worker ./worker
