@@ -10,7 +10,7 @@ services:
         restart: always
         depends_on: 
             - api
-            - clients
+            - client
         build:
             dockerfile: Dockerfile.dev
             context: ./nginx
@@ -37,10 +37,10 @@ services:
         stdin_open: true
         build:
             dockerfile: Dockerfile.dev
-            context: ./clients
+            context: ./client
         volumes:
             - /app/node_modules
-            - ./clients:/app
+            - ./client:/app
     worker:
         environment:
             - REDIS_HOST=redis
